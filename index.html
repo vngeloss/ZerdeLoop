@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Круг знаний Zerde — MentorLink KZ</title>
-    <!-- Подключаем мягкие округлые шрифты Nunito и Manrope -->
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
-    <!-- Подключаем Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Подключаем официальную библиотеку Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <script>
@@ -21,10 +18,10 @@
                     },
                     colors: {
                         brand: {
-                            bg: '#F9F6F0',      /* Теплый кремово-песочный (курортный) */
-                            primary: '#5F7D65', /* Мягкий шалфейно-зеленый */
-                            dark: '#2C3531',    /* Мягкий темно-грифельный */
-                            card: '#FFFFFF',    /* Чистый белый для карточек */
+                            bg: '#F9F6F0',
+                            primary: '#5F7D65',
+                            dark: '#2C3531',
+                            card: '#FFFFFF',
                         }
                     }
                 }
@@ -34,7 +31,6 @@
 </head>
 <body class="bg-brand-bg text-brand-dark min-h-screen font-sans antialiased selection:bg-brand-primary/20">
 
-    <!-- ШАПКА САЙТА -->
     <header class="max-w-6xl mx-auto px-6 py-8 flex justify-between items-center">
         <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary">
@@ -55,7 +51,6 @@
         <a href="#join" class="bg-brand-primary text-white font-title font-bold px-6 py-3 rounded-full hover:bg-brand-primary/95 transition-all shadow-sm hover:shadow-md transform hover:-translate-y-0.5">Войти в круг</a>
     </header>
 
-    <!-- ГЛАВНЫЙ ЭКРАН -->
     <main class="max-w-6xl mx-auto px-6 py-12 md:py-20">
         <div class="text-center max-w-3xl mx-auto mb-16 md:mb-24">
             <span class="bg-brand-primary/10 text-brand-primary font-title font-bold px-4 py-1.5 rounded-full text-sm inline-block mb-6">Образовательное волонтерство в Казахстане</span>
@@ -71,23 +66,19 @@
             </div>
         </div>
 
-        <!-- КАК ЭТО РАБОТАЕТ (BENTO GRID) -->
         <section id="how-it-works" class="mb-24 md:mb-32">
             <h2 class="font-title font-extrabold text-3xl md:text-4xl text-center mb-12">Как работает Круг Zerde</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Шаг 1 -->
                 <div class="bg-brand-card p-8 rounded-[32px] border border-gray-200/50 shadow-sm hover:shadow-md transition-all">
                     <div class="w-12 h-10 rounded-2xl bg-brand-primary/10 flex items-center justify-center text-brand-primary font-title font-bold text-lg mb-6">1</div>
                     <h3 class="font-title font-bold text-xl mb-3">Заполняешь анкету</h3>
                     <p class="text-brand-dark/70 text-sm leading-relaxed">Пишешь предмет, который хочешь подтянуть перед ЕНТ, и тему, которой готов обучить другого (или просто готов помочь).</p>
                 </div>
-                <!-- Шаг 2 -->
                 <div class="bg-brand-card p-8 rounded-[32px] border border-gray-200/50 shadow-sm hover:shadow-md transition-all">
                     <div class="w-12 h-10 rounded-2xl bg-brand-primary/10 flex items-center justify-center text-brand-primary font-title font-bold text-lg mb-6">2</div>
                     <h3 class="font-title font-bold text-xl mb-3">Алгоритм строит Круг</h3>
                     <p class="text-brand-dark/70 text-sm leading-relaxed">Наш ИИ анализирует базу и замыкает цепочки из 3 или 4 человек так, чтобы каждый получил нужное знание бесплатно.</p>
                 </div>
-                <!-- Шаг 3 -->
                 <div class="bg-brand-card p-8 rounded-[32px] border border-gray-200/50 shadow-sm hover:shadow-md transition-all">
                     <div class="w-12 h-10 rounded-2xl bg-brand-primary/10 flex items-center justify-center text-brand-primary font-title font-bold text-lg mb-6">3</div>
                     <h3 class="font-title font-bold text-xl mb-3">Учитесь вместе</h3>
@@ -96,7 +87,6 @@
             </div>
         </section>
 
-        <!-- АНКЕТА И ВСТУПЛЕНИЕ В КРУГ -->
         <section id="join" class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-24 md:mb-32 scroll-mt-6">
             <div class="lg:col-span-5 flex flex-col justify-center">
                 <span class="text-brand-primary font-title font-bold tracking-wider uppercase text-sm mb-3">Присоединиться</span>
@@ -116,7 +106,6 @@
                 </div>
             </div>
 
-            <!-- ФОРМА (С УСПЕШНЫМ СОСТОЯНИЕМ) -->
             <div class="lg:col-span-7 bg-brand-card p-8 md:p-10 rounded-[32px] border border-gray-200/50 shadow-sm relative">
                 <form id="matchingForm" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -176,7 +165,6 @@
                     </button>
                 </form>
 
-                <!-- Состояние успеха (скрыто по умолчанию) -->
                 <div id="successState" class="hidden absolute inset-0 bg-brand-card rounded-[32px] flex flex-col items-center justify-center p-8 text-center">
                     <div class="w-16 h-16 bg-brand-primary/10 text-brand-primary rounded-full flex items-center justify-center mb-6">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8">
@@ -194,7 +182,6 @@
             </div>
         </section>
 
-        <!-- ЖИВОЙ ДАШБОРД -->
         <section id="dashboard" class="mb-24 scroll-mt-6">
             <div class="text-center max-w-2xl mx-auto mb-12">
                 <span class="text-brand-primary font-title font-bold tracking-wider uppercase text-sm mb-3">Технологии в действии</span>
@@ -205,25 +192,21 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-                <!-- Левая колонка: Сформированные круги -->
                 <div class="lg:col-span-7 space-y-6">
                     <h3 class="font-title font-bold text-xl flex items-center gap-2 mb-4">
                         <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-ping"></span>
                         Сформированные круги взаимопомощи
                     </h3>
                     <div id="loopsContainer" class="space-y-4">
-                        <!-- Сюда ИИ зарендерит круги -->
                         <div class="bg-brand-card p-6 rounded-[24px] border border-gray-200/50 text-center text-brand-dark/50 text-sm py-12">
                             Ищем и рассчитываем цепочки...
                         </div>
                     </div>
                 </div>
 
-                <!-- Правая колонка: Ожидают подбора -->
                 <div class="lg:col-span-5 space-y-6">
                     <h3 class="font-title font-bold text-xl mb-4">Ожидают подбора звена</h3>
                     <div id="waitingContainer" class="space-y-3">
-                        <!-- Сюда ИИ зарендерит список ожидания -->
                         <div class="bg-brand-card p-6 rounded-[24px] border border-gray-200/50 text-center text-brand-dark/50 text-sm py-12">
                             Загрузка списка ожидания...
                         </div>
@@ -240,15 +223,13 @@
         </div>
     </footer>
 
-    <!-- ПОДКЛЮЧЕНИЕ БАЗЫ ДАННЫХ И АЛГОРИТМА -->
     <script>
-        // ИНИЦИАЛИЗАЦИЯ SUPABASE
+        // Config
         const SUPABASE_URL = "https://thwghfqxbaqylqpfsmzr.supabase.co";
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRod2doZnF4YmFxeWxxcGZzbXpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQzMDM0MzgsImV4cCI6MjA5OTg3OTQzOH0.P8iOXFqk9c68dApDHeupWrsy5pC-x1hHvIGeRkdozoc";
 
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // Работа с формой
         const form = document.getElementById('matchingForm');
         const successState = document.getElementById('successState');
         const resetBtn = document.getElementById('resetFormBtn');
@@ -271,10 +252,7 @@
 
                 if (error) throw error;
 
-                // Показываем экран успеха
                 successState.classList.remove('hidden');
-                
-                // Пересчитываем дашборд
                 fetchAndMatchUsers();
 
             } catch (error) {
@@ -288,7 +266,7 @@
             successState.classList.add('hidden');
         });
 
-        // АЛГОРИТМ ПОИСКА КРУГОВ (Zerde Loop)
+        // Matchmaking logic
         async function fetchAndMatchUsers() {
             try {
                 const { data: users, error } = await supabaseClient
@@ -305,7 +283,7 @@
                 let matchedIds = new Set();
                 let foundLoops = [];
 
-                // 1. Поиск двусторонних совпадений (Циклы из 2 человек)
+                // 2-way loops
                 for (let i = 0; i < users.length; i++) {
                     if (matchedIds.has(users[i].id)) continue;
                     for (let j = i + 1; j < users.length; j++) {
@@ -326,7 +304,7 @@
                     }
                 }
 
-                // 2. Поиск трехсторонних совпадений (Циклы из 3 человек)
+                // 3-way loops
                 for (let i = 0; i < users.length; i++) {
                     if (matchedIds.has(users[i].id)) continue;
                     for (let j = 0; j < users.length; j++) {
@@ -338,7 +316,6 @@
                             let u2 = users[j];
                             let u3 = users[k];
 
-                            // Проверяем цепочку: U1 дает U2, U2 дает U3, U3 дает U1
                             if (u1.want_subject === u2.give_subject && 
                                 u2.want_subject === u3.give_subject && 
                                 u3.want_subject === u1.give_subject) {
@@ -357,16 +334,15 @@
                     }
                 }
 
-                // Вывод результатов на экран
                 renderLoops(foundLoops);
                 renderWaiting(users.filter(u => !matchedIds.has(u.id)));
 
             } catch (err) {
-                console.error("Ошибка в работе алгоритма матчинга:", err);
+                console.error("Error in matchmaking:", err);
             }
         }
 
-        // Отрисовка кругов с кликабельными Telegram-ссылками
+        // Render matches
         function renderLoops(loops) {
             const container = document.getElementById('loopsContainer');
             container.innerHTML = '';
@@ -382,8 +358,6 @@
 
             loops.forEach((loop, idx) => {
                 let html = '';
-                
-                // Функция для очистки ника телеграм от знака @
                 const cleanTg = (username) => username ? username.replace('@', '').trim() : '';
 
                 if (loop.type === 2) {
@@ -442,7 +416,7 @@
             });
         }
 
-        // Отрисовка списка ожидания с кликабельными Telegram-ссылками
+        // Render queue
         function renderWaiting(waitingUsers) {
             const container = document.getElementById('waitingContainer');
             container.innerHTML = '';
@@ -492,8 +466,9 @@
             `;
         }
 
-        // Запуск при открытии страницы
         window.onload = fetchAndMatchUsers;
     </script>
 </body>
 </html>
+
+--- END OF FILE Paste July 18, 2026 - 4:18PM ---
