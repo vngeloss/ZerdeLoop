@@ -194,7 +194,7 @@
             </div>
         </section>
 
-        <!-- ЖИВОЙ ДАШБОРД (НОВЫЙ БЛОК ДНЯ 2) -->
+        <!-- ЖИВОЙ ДАШБОРД -->
         <section id="dashboard" class="mb-24 scroll-mt-6">
             <div class="text-center max-w-2xl mx-auto mb-12">
                 <span class="text-brand-primary font-title font-bold tracking-wider uppercase text-sm mb-3">Технологии в действии</span>
@@ -244,8 +244,6 @@
     <script>
         // ИНИЦИАЛИЗАЦИЯ SUPABASE
         const SUPABASE_URL = "https://thwghfqxbaqylqpfsmzr.supabase.co";
-        
-        // ВСТАВЬТЕ СЮДА СВОЙ ДЛИННЫЙ КЛЮЧ public anon ИЗ SUPABASE:
         const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRod2doZnF4YmFxeWxxcGZzbXpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQzMDM0MzgsImV4cCI6MjA5OTg3OTQzOH0.P8iOXFqk9c68dApDHeupWrsy5pC-x1hHvIGeRkdozoc";
 
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -368,7 +366,7 @@
             }
         }
 
-        // Отрисовка кругов
+        // Отрисовка кругов с кликабельными Telegram-ссылками
         function renderLoops(loops) {
             const container = document.getElementById('loopsContainer');
             container.innerHTML = '';
@@ -384,6 +382,10 @@
 
             loops.forEach((loop, idx) => {
                 let html = '';
+                
+                // Функция для очистки ника телеграм от знака @
+                const cleanTg = (username) => username ? username.replace('@', '').trim() : '';
+
                 if (loop.type === 2) {
                     html = `
                         <div class="bg-brand-card p-6 rounded-[28px] border border-brand-primary/20 shadow-sm relative overflow-hidden">
@@ -391,14 +393,18 @@
                             <h4 class="font-title font-bold text-sm text-brand-primary mb-3">Совпадение найденных партнеров</h4>
                             <div class="flex flex-col sm:flex-row items-center justify-between gap-4 py-2">
                                 <div class="text-center sm:text-left">
-                                    <p class="font-title font-bold text-base">${loop.members[0].name}</p>
+                                    <a href="https://t.me/${cleanTg(loop.members[0].contact)}" target="_blank" class="font-title font-bold text-base text-brand-dark hover:text-brand-primary hover:underline transition-colors">
+                                        ${loop.members[0].name} ↗
+                                    </a>
                                     <p class="text-xs text-brand-dark/60">Хочет: <span class="font-semibold text-brand-primary">${loop.members[0].want_subject}</span></p>
                                 </div>
                                 <div class="text-brand-primary text-xl flex items-center gap-1 font-bold">
                                     ⇄
                                 </div>
                                 <div class="text-center sm:text-right">
-                                    <p class="font-title font-bold text-base">${loop.members[1].name}</p>
+                                    <a href="https://t.me/${cleanTg(loop.members[1].contact)}" target="_blank" class="font-title font-bold text-base text-brand-dark hover:text-brand-primary hover:underline transition-colors">
+                                        ${loop.members[1].name} ↗
+                                    </a>
                                     <p class="text-xs text-brand-dark/60">Хочет: <span class="font-semibold text-brand-primary">${loop.members[1].want_subject}</span></p>
                                 </div>
                             </div>
@@ -410,16 +416,22 @@
                             <div class="absolute top-4 right-4 bg-brand-primary/25 text-brand-primary text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">Круг Zerde</div>
                             <h4 class="font-title font-bold text-sm text-brand-primary mb-4">Замкнутый круг из 3-х учеников</h4>
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center py-2 relative">
-                                <div class="p-3 bg-brand-bg/40 rounded-2xl border border-gray-100">
-                                    <p class="font-title font-bold text-base text-brand-primary">${loop.members[0].name}</p>
+                                <div class="p-3 bg-brand-bg/40 rounded-2xl border border-gray-100 hover:border-brand-primary/30 transition-all">
+                                    <a href="https://t.me/${cleanTg(loop.members[0].contact)}" target="_blank" class="font-title font-bold text-base text-brand-primary hover:underline">
+                                        ${loop.members[0].name} ↗
+                                    </a>
                                     <p class="text-[10px] text-brand-dark/60 mt-1">Обучает предмету: <b>${loop.members[0].give_subject}</b></p>
                                 </div>
-                                <div class="p-3 bg-brand-bg/40 rounded-2xl border border-gray-100">
-                                    <p class="font-title font-bold text-base text-brand-primary">${loop.members[1].name}</p>
+                                <div class="p-3 bg-brand-bg/40 rounded-2xl border border-gray-100 hover:border-brand-primary/30 transition-all">
+                                    <a href="https://t.me/${cleanTg(loop.members[1].contact)}" target="_blank" class="font-title font-bold text-base text-brand-primary hover:underline">
+                                        ${loop.members[1].name} ↗
+                                    </a>
                                     <p class="text-[10px] text-brand-dark/60 mt-1">Обучает предмету: <b>${loop.members[1].give_subject}</b></p>
                                 </div>
-                                <div class="p-3 bg-brand-bg/40 rounded-2xl border border-gray-100">
-                                    <p class="font-title font-bold text-base text-brand-primary">${loop.members[2].name}</p>
+                                <div class="p-3 bg-brand-bg/40 rounded-2xl border border-gray-100 hover:border-brand-primary/30 transition-all">
+                                    <a href="https://t.me/${cleanTg(loop.members[2].contact)}" target="_blank" class="font-title font-bold text-base text-brand-primary hover:underline">
+                                        ${loop.members[2].name} ↗
+                                    </a>
                                     <p class="text-[10px] text-brand-dark/60 mt-1">Обучает предмету: <b>${loop.members[2].give_subject}</b></p>
                                 </div>
                             </div>
@@ -430,7 +442,7 @@
             });
         }
 
-        // Отрисовка списка ожидания
+        // Отрисовка списка ожидания с кликабельными Telegram-ссылками
         function renderWaiting(waitingUsers) {
             const container = document.getElementById('waitingContainer');
             container.innerHTML = '';
@@ -444,12 +456,16 @@
                 return;
             }
 
+            const cleanTg = (username) => username ? username.replace('@', '').trim() : '';
+
             waitingUsers.forEach(user => {
                 const html = `
                     <div class="bg-brand-card p-4 rounded-2xl border border-gray-200/40 flex items-center justify-between hover:shadow-sm transition-all">
                         <div>
                             <p class="font-title font-bold text-sm flex items-center gap-2">
-                                ${user.name}
+                                <a href="https://t.me/${cleanTg(user.contact)}" target="_blank" class="hover:text-brand-primary hover:underline">
+                                    ${user.name} ↗
+                                </a>
                                 <span class="text-[9px] font-bold px-2 py-0.5 rounded-full ${user.role === 'школьник' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'}">${user.role}</span>
                             </p>
                             <p class="text-[10px] text-brand-dark/60 mt-1">Ищет: <span class="font-semibold text-brand-primary">${user.want_subject}</span></p>
