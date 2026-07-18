@@ -182,6 +182,7 @@
             </div>
         </section>
 
+        <!-- ЖИВОЙ ДАШБОРД -->
         <section id="dashboard" class="mb-24 scroll-mt-6">
             <div class="text-center max-w-2xl mx-auto mb-12">
                 <span class="text-brand-primary font-title font-bold tracking-wider uppercase text-sm mb-3">Технологии в действии</span>
@@ -350,7 +351,7 @@
             return '@' + clean.substring(0, 2) + '***' + clean.substring(clean.length - 1);
         };
 
-        // Render matches
+        // Render matches with direct secure buttons
         function renderLoops(loops) {
             const container = document.getElementById('loopsContainer');
             container.innerHTML = '';
@@ -366,6 +367,7 @@
 
             loops.forEach((loop, idx) => {
                 let html = '';
+                const cleanTg = (username) => username ? username.replace('@', '').trim() : '';
 
                 if (loop.type === 2) {
                     html = `
@@ -385,11 +387,13 @@
                                     <p class="text-xs text-brand-dark/60">Хочет: <span class="font-semibold text-brand-primary">${loop.members[1].want_subject}</span></p>
                                 </div>
                             </div>
-                            <!-- Secure Chat Button (Privacy Protection) -->
-                            <div class="border-t border-gray-100 pt-4 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
-                                <div class="text-brand-dark/50">Совпавшие контакты: <span class="font-mono text-brand-dark/80">${maskTg(loop.members[0].contact)}</span> и <span class="font-mono text-brand-dark/80">${maskTg(loop.members[1].contact)}</span></div>
-                                <a href="https://t.me/zerde_loop_bot" target="_blank" class="bg-brand-primary/10 text-brand-primary font-title font-bold px-4 py-2 rounded-full hover:bg-brand-primary hover:text-white transition-all text-center">
-                                    Начать безопасный чат ↗
+                            <!-- Direct Action Buttons -->
+                            <div class="border-t border-gray-100 pt-4 flex flex-col sm:flex-row justify-end items-center gap-3">
+                                <a href="https://t.me/${cleanTg(loop.members[0].contact)}" target="_blank" class="bg-brand-primary/10 text-brand-primary font-title text-xs font-bold px-4 py-2 rounded-full hover:bg-brand-primary hover:text-white transition-all text-center">
+                                    Написать ${loop.members[0].name} ↗
+                                </a>
+                                <a href="https://t.me/${cleanTg(loop.members[1].contact)}" target="_blank" class="bg-brand-primary/10 text-brand-primary font-title text-xs font-bold px-4 py-2 rounded-full hover:bg-brand-primary hover:text-white transition-all text-center">
+                                    Написать ${loop.members[1].name} ↗
                                 </a>
                             </div>
                         </div>
@@ -398,7 +402,7 @@
                     html = `
                         <div class="bg-brand-card p-6 rounded-[28px] border border-brand-primary/30 shadow-sm relative overflow-hidden">
                             <div class="absolute top-4 right-4 bg-brand-primary/25 text-brand-primary text-[10px] font-bold px-2.5 py-0.5 rounded-full uppercase">Круг Zerde</div>
-                            <h4 class="font-title font-bold text-sm text-brand-primary mb-4">Замкнутый круг из 3-х участников</h4>
+                            <h4 class="font-title font-bold text-sm text-brand-primary mb-4">Замкнутый круг из 3-х участником</h4>
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center py-2 relative mb-4">
                                 <div class="p-3 bg-brand-bg/40 rounded-2xl border border-gray-100">
                                     <p class="font-title font-bold text-base text-brand-primary">${loop.members[0].name}</p>
@@ -413,11 +417,16 @@
                                     <p class="text-[10px] text-brand-dark/60 mt-1">Обучает предмету: <b>${loop.members[2].give_subject}</b></p>
                                 </div>
                             </div>
-                            <!-- Secure Chat Button (Privacy Protection) -->
-                            <div class="border-t border-gray-100 pt-4 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
-                                <div class="text-brand-dark/50">Контакты круга скрыты ради безопасности данных.</div>
-                                <a href="https://t.me/zerde_loop_bot" target="_blank" class="bg-brand-primary text-white font-title font-bold px-5 py-2.5 rounded-full hover:bg-brand-primary/90 transition-all shadow-sm text-center">
-                                    Начать безопасный чат ↗
+                            <!-- Direct Action Buttons -->
+                            <div class="border-t border-gray-100 pt-4 flex flex-wrap justify-end items-center gap-2">
+                                <a href="https://t.me/${cleanTg(loop.members[0].contact)}" target="_blank" class="bg-brand-primary text-white font-title text-xs font-bold px-4 py-2 rounded-full hover:bg-brand-primary/90 transition-all shadow-sm text-center">
+                                    Чат с ${loop.members[0].name} ↗
+                                </a>
+                                <a href="https://t.me/${cleanTg(loop.members[1].contact)}" target="_blank" class="bg-brand-primary text-white font-title text-xs font-bold px-4 py-2 rounded-full hover:bg-brand-primary/90 transition-all shadow-sm text-center">
+                                    Чат с ${loop.members[1].name} ↗
+                                </a>
+                                <a href="https://t.me/${cleanTg(loop.members[2].contact)}" target="_blank" class="bg-brand-primary text-white font-title text-xs font-bold px-4 py-2 rounded-full hover:bg-brand-primary/90 transition-all shadow-sm text-center">
+                                    Чат с ${loop.members[2].name} ↗
                                 </a>
                             </div>
                         </div>
@@ -441,12 +450,16 @@
                 return;
             }
 
+            const cleanTg = (username) => username ? username.replace('@', '').trim() : '';
+
             waitingUsers.forEach(user => {
                 const html = `
                     <div class="bg-brand-card p-4 rounded-2xl border border-gray-200/40 flex items-center justify-between hover:shadow-sm transition-all">
                         <div>
                             <p class="font-title font-bold text-sm flex items-center gap-2">
-                                ${user.name}
+                                <a href="https://t.me/${cleanTg(user.contact)}" target="_blank" class="hover:text-brand-primary hover:underline">
+                                    ${user.name} ↗
+                                </a>
                                 <span class="text-[9px] font-bold px-2 py-0.5 rounded-full ${user.role === 'школьник' ? 'bg-orange-100 text-orange-700' : 'bg-blue-100 text-blue-700'}">${user.role}</span>
                             </p>
                             <p class="text-[10px] text-brand-dark/60 mt-1">Ищет: <span class="font-semibold text-brand-primary">${user.want_subject}</span></p>
